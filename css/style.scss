@@ -1,0 +1,373 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Test-font";
+}
+
+
+@font-face {
+    font-family: 'Exo';           
+    src: url('../fonts/Exo2.0-Thin.otf') format('opentype');
+    font-weight: 400;             
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Test-font';           
+    src: url('../fonts/trebuc.ttf') format('truetype');
+    font-weight: 400;             
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Test-font';           
+    src: url('../fonts/trebucbd.ttf') format('truetype');
+    font-weight: bold;             
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Test-font';           
+    src: url('../fonts/trebucbi.ttf') format('truetype');
+    font-weight: bold;             
+    font-style: italic;
+
+}
+@font-face {
+    font-family: 'Test-font';           
+    src: url('../fonts/trebucit.ttf') format('truetype');
+    font-weight: 400;             
+    font-style: italic;
+}
+
+$color_selected:      #D91667;
+$color_selectedHover: #E62E7A;
+$color_back:          #F2F2F2;
+$color_default:       #1698D9;
+$color_defaultHover:  #2EA8E6;
+$color_disable:       #B3B3B3;
+
+@mixin stand_nyam($multiply:1) {
+
+    $width:  320px*$multiply;
+    $height: 480px*$multiply;
+    $border: 4px*$multiply;
+    $clip:   42px*$multiply;
+
+    .nyam {
+        width: $width + $border*2;
+        height: $height + $border*2;
+        &-border {
+            width: $width + $border*2;
+            height: $height + $border*2;
+            border-radius: $border*2 + 2px;
+            clip-path: polygon(($clip+1px) 0, 100% 0, 100% 100%, 0 100%, 0 ($clip+1px));
+        }
+        &-block {
+            width: $width;
+            height: $height;
+            clip-path: polygon($clip 0, 100% 0, 100% 100%, 0 100%, 0 $clip);
+            border-radius: $border*2;
+            top:  $border;
+            left: $border;
+            &-text {
+                font-size: 13px*$multiply;
+                top: $height + 16px;
+            }
+            &-title {
+                left: 48px*$multiply;
+                top: 28px*$multiply;
+                & > p:nth-child(1) {
+                    font-size: 16px*$multiply;
+                }    
+                & > p:nth-child(3) {
+                    font-size: 24px*$multiply;
+                }
+                h2 {
+                    font-size: 48px*$multiply;
+                }   
+            }
+            &-container {
+                left: 66px*$multiply;
+                top: 145px*$multiply;
+                & > p {
+                    font-size: 14px*$multiply;
+                }
+
+            }
+            img {
+                width: 370px*$multiply;
+                height: 361px*$multiply;
+                bottom: -90px*$multiply;
+                left: -26px*$multiply;
+            }
+        
+            &-circle {
+                right: 15px*$multiply;
+                bottom: 15px*$multiply;
+                width: 80px*$multiply;
+                height: 80px*$multiply;
+                p {
+                    font-size: 21px*$multiply;
+                    span{
+                        font-size: 42px*$multiply;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.back {
+    background-image: url('../img/fon.png');
+    background-repeat: repeat;
+    // background-size: 100%;
+    min-width: 100vw;
+    min-height: 100vh;
+    // position: fixed;
+}
+
+h1 {
+    font-family: 'Exo';
+    font-size: 36px;
+    text-align: center;
+    color: white;
+    line-height: 100px;
+
+   
+}
+.center {
+    // position: absolute;
+    margin: 0 auto;
+    width: 1120px;
+    // height: 630px;
+    top: 0; left: 0; bottom: 0; right: 0;
+
+}
+.nyams {
+    display: flex;
+    width: 1120px;
+    margin: 0 auto;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    @include stand_nyam;
+}
+
+.nyam {
+    position: relative;
+    &-border {
+        top: 0;
+        background-color: $color_default;
+        transition:  background .3s ease 0s;
+    }
+    &-block {
+        background-color: #F2F2F2;
+        position: absolute;
+        overflow:hidden;
+        &-text {
+            color: white;
+            position: absolute;
+            left: 0;
+            right: 0;
+            text-align: center;
+            a {
+                color: $color_default;
+                text-decoration: none;
+                border-bottom: 1px dashed $color_default;
+            }
+            a:hover {
+                color: $color_defaultHover;
+                border-bottom: 1px dashed $color_defaultHover;
+                cursor: pointer;
+            }
+        }
+        &-title {
+            position: absolute;
+            & > p:nth-child(1) {
+                text-align: center;
+                color: #666666;
+            }    
+            & > p:nth-child(3) {
+                font-weight: bold;
+            }
+            h2 {
+                font-family: "Test-font";
+                font-weight: 700;
+                text-align: center;
+            }   
+        }
+        &-container {
+            position: absolute;
+            & > p {
+                color: #666666;
+                span{
+                    font-weight: bold;
+                }
+            }
+
+        }
+        img {
+            position: absolute;
+        }
+    
+        &-circle {
+            transition:  background .3s ease 0s;
+            position: absolute;
+            border-radius: 50%;
+            background-color: $color_default;
+            text-align: center;
+            color: white;
+            p {
+                font-size: 21px;
+              
+                span{
+                    font-size: 42px;
+                    
+                }
+            }
+        }
+    }
+}
+.selected {
+
+        background-color: $color_selected;
+
+    .nyam-block-circle{
+        background-color: $color_selected;
+    }
+}
+.disable {
+
+        background-color: $color_disable;
+
+    .nyam-block-circle{
+        background-color: $color_disable;
+    }
+    .nyam-block-title, .nyam-block-container, img {
+        opacity: 0.5;
+    }
+}
+.hover.selected{
+    
+        background-color: $color_selectedHover;
+
+    .nyam-block-circle{
+        background-color: $color_selectedHover;
+    }
+}
+.hover.default {
+   
+        background-color: $color_defaultHover;
+
+    .nyam-block-circle{
+        background-color: $color_defaultHover;
+    }
+}
+@media (max-width: 1130px) {
+    .nyams {
+        width: 800px;
+        .nyam:nth-child(1) {
+            flex-basis: 100%;
+            margin: 0 auto 50px;
+            .nyam-border, .nyam-block  {
+                right: 0; 
+                left: 0;
+                margin: 0 auto;
+            }
+        } 
+        @include stand_nyam(0.8125);
+    }
+    .center {
+        position: relative;
+        width: 100%;
+        // height: 1112px;
+    }
+    .back {
+        min-width: 100%;
+        min-height: 100%;
+    }
+}
+// @media (max-width: 1024px) {
+//     .center {
+//         height: 1336px;
+//     }
+// }
+@media (max-width: 900px) {
+    .nyams {
+        width: 600px;
+    }
+}
+@media (max-width: 768px) {
+    // .center {
+    //     height: 1024px;
+    // }
+}
+
+@media (max-width: 660px) {
+    .nyams {
+        width: 100%;
+        .nyam {
+            flex-basis: 100%;
+            margin: 0 auto 50px;
+            .nyam-border, .nyam-block  {
+                right: 0; 
+                left: 0;
+                margin: 0 auto;
+            }
+        } 
+        @include stand_nyam;
+    }
+    // .center {
+    //     height: 1720px;
+    // }
+}
+@media (max-width: 510px) {
+    h1 {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 375px) {
+    h1 {
+        font-size: 20px;
+    }
+    .nyams {
+        @include stand_nyam(0.8125);
+    }
+    // .center {
+    //     height: 1500px;
+    // }
+}
+@media (max-width: 1025px) {
+    
+}
+@media (max-width: 835px) {
+    
+}
+@media (max-width: 801px) {
+    
+}
+
+@media (max-width: 769px) { //iPad
+    
+}
+@media (max-width: 601px) {
+    
+}
+
+
+
+@media (max-width: 415px) { // Note 9
+    
+}
+@media (max-width: 412px) { // Pixel
+    
+}
+
+
+@media (max-width: 376px) {
+    
+}
+@media (max-width: 361px) { // S9/S9+
+    
+}
+
+
+
